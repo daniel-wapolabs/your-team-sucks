@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Your Team Sucks</title>
+    <style>
+    /* style reset */
+
+  * {
+
+    margin: 0;
+
+    padding: 0;
+
+    border: 0;
+
+    font-size: 100%;
+
+    font: inherit;
+
+    vertical-align: baseline;
+
+    }
+
+    /* HTML5 display-role reset for older browsers */
+
+    article, aside, details, figcaption, figure, 
+
+    footer, header, hgroup, menu, nav, section {
+
+    display: block;
+
+    }
+
+    body {
+
+    line-height: 1;
+
+    }
+
+    ol, ul {
+
+    list-style: none;
+
+    }
+
+    blockquote, q {
+
+    quotes: none;
+
+    }
+
+    blockquote:before, blockquote:after,
+
+    q:before, q:after {
+
+    content: '';
+
+    content: none;
+
+    }
+
+    table {
+
+    border-collapse: collapse;
+
+    border-spacing: 0;
+
+    }
+
+    /**
+    Global Styles
+    **/ 
+
+    .clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+    }
+    .clearfix {
+    display: inline-block;
+    }
+    html[xmlns] .clearfix {
+    display: block;
+
+    }
+    * html .clearfix {
+    height: 1%;
+    }   
+
+    /**APP STYLES**/
+    body {
+    font-family:Verdana, sans-serif;
+    }
+
+    #container {
+    width:960px;
+    margin:0 auto;
+    }
+    #topNav {
+        position:relative;
+        height:75px;
+    }
+    #topNav ul {
+        position: absolute;
+        top:25px;
+    }
+    #topNav ul, #topNav ul li {
+        display:inline;
+        margin-left:60px;
+    }
+    #topNav ul li {
+        margin-right:50px;
+    }
+    #topNav ul li a {
+        color:#036;
+        text-decoration: none;
+    }
+    #content {
+        position: relative;
+        background: #fff url(http://www.richiegarcia.com/yourTeamSucks/background.gif) repeat;
+        height:500px;        
+    }
+    #away {
+        position: absolute;
+        top:70px;
+        left: 60px;
+        background: transparent url(http://www.richiegarcia.com/yourTeamSucks/giants.png) no-repeat;
+        width:156px;        
+        height:420px;
+    }
+    #actionButtons {
+        position: absolute;
+        top:32px;
+        left: 215px;
+        background:#fff;
+        width:275px;
+        height:455px;
+        text-align: center;
+    }
+    #actionButtons a {
+        display:block;
+        width:150px;
+        background: #fd5b1d;
+        color:#fff;
+        font:bold 18px arial;
+        text-decoration: none;
+        margin:50px 45px;
+        padding:5px 15px 5px;
+        }
+    #actionButtons .invite {
+        background: none;
+        color:#036;
+        line-height: 30px;        
+        text-decoration: underline;
+        }
+    #home {
+        background: transparent url(http://www.richiegarcia.com/yourTeamSucks/nats.png) no-repeat;
+        position: absolute;
+        top:70px;
+        left: 490px;
+        width:156px;        
+        height:420px;
+    }
+    /** Feed styles **/
+    #chatterbox {
+        position: relative;
+        top:0px;
+        left:680px;
+        z-index: 99;
+        background: #fff;
+        width:240px;
+    }
+    #feed {
+        width:240px;
+        height:482px;
+        color:000;
+        display:inline-block;
+    }
+    #feed h2 {
+        font:bold 18px "Trebuchet MS", Arial, Helvetica, sans-serif;
+        padding:5px 0;
+        margin-bottom: 5px;
+        text-align:center;
+        background:#fd5b1d;
+        color:#fff;
+        width:100%;
+    }
+    #feed .item {
+        padding-left: 5px;
+        margin-bottom: 5px;
+        font-size:13px;
+        color:#000;
+        width:200px;
+    }
+    #feed .away {
+        color: #df0008;
+    }
+    #feed .home {
+        color: #fd5b1d;
+    }
+
+    /** dialogue boxes **/
+    #talkTrash,
+    #predictBox,
+    #wagerBox
+     {display:none;}
+    .trashBox {
+    position:absolute;
+    z-index:99;
+    top:150px;
+    left:650px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px; 
+    width:370px;
+    height:100px;
+    border:1px solid #fff;
+    padding:10px;
+    background:#fd5b1d;
+    font:normal 14px arial;
+    color:#fff;
+    }
+    .trashBox textarea {
+        padding:5px;
+        width:350px;
+        height:55px;
+    }
+    .trashBox input, .trashBox button {
+        float:left;
+        display:block;
+        margin:5px 0 0 10px;
+        padding:5px;
+    }
+    .trashBox button {
+        display:block;
+        float:left; 
+        margin-left:200px;
+        padding:5px;
+    }
+    #predict .score1, #predict .score2 {
+        display:block;
+        float:left;
+    }
+    #predict .score1, #predict .score2 {
+        display:inline;
+        float:none;
+        width:50px;
+    }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script>
+    $(function(){
+      $('a#trash').click(
+      function() {
+        $('#talkTrash').fadeIn("normal");
+        })
+    });
+
+    $(function(){
+      $('a#predict').click(
+      function() {
+        $('#predictBox').fadeIn("normal");
+        })
+    });
+
+
+
+    //Hide popup box and clear values
+    $(function(){
+      $('.trashBox button').click(
+      function() {
+        $('.trashBox').fadeOut("normal");
+        $('.trashBox textarea').val('');
+        $('#predict .score1').val('');
+        $('#predict .score2').val('');
+        })
+    });
+
+    $(function(){
+        $('#predict input[type="submit"]').click(
+        function() {
+            var score1 = $('#predict .score1').attr('value');
+            var score2 = $('#predict .score2').attr('value');
+            $("#feed").append('<div class="item"><span class="user away">Brian Neuman</span>: Has predicted a score of <br>Giants - ' + score1 + '<br>Nationals - ' + score2 + '</div>');
+            $('.trashBox').fadeOut("normal");
+        })
+    });
+
+    $(function(){
+      $('#trashForm input[type="submit"]').click(
+      function() {
+        var msg = $('#trashForm textarea').attr('value');
+        $("#feed").append('<div class="item"><span class="user home">Brian Neuman</span>:' + msg + '</div>');
+        $('#trashForm textarea').val('');
+        $('.trashBox').fadeOut("normal");
+        })
+    });
+
+    $(function(){
+      $('a#wager').click(
+      function() {
+        $('#wagerBox').fadeIn("normal");
+        })
+    });
+
+    $(function(){
+      $('#placeBet input[type="submit"]').click(
+      function() {
+        var msg = $('#placeBet textarea').attr('value');
+        $("#feed").append('<div class="item"><span class="user away">Brian Neuman</span> has placed ' + msg + '</div>');
+        $('#trashForm textarea').val('');
+        $('.trashBox').fadeOut("normal");
+        })
+    });
+
+
+    </script>       
+</head>
+
+<body>
+<div id="container">
+    <div id="topNav">
+        <img class="logo" src="http://www.richiegarcia.com/yourTeamSucks/logo.jpg" alt="Your Team Sucks!" />
+        <ul>
+            <li><a href="javascript:void(0)">Home</a></li>
+            <li><a href="javascript:void(0)">Friends</a></li>
+            <li><a href="javascript:void(0)">Games</a></li>
+            <li><a href="javascript:void(0)">Wagers</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <div id="away">
+        </div>
+        <div id="actionButtons">
+            <a id="trash" href="javascript:void(0)">Talk Trash</a>
+            <a id="predict" href="javascript:void(0)">Predict</a>
+            <a id="wager" href="javascript:void(0)">Wager</a>
+            <a href="javascript:void(0)" class="invite">Invite your Friends!</a>
+        </div>
+        <div id="home">
+        </div>
+        <div id="chatterbox">
+            <div id="feed">
+                <h2>Locker Room</h2>
+                <div class="item"><span class="user away">Richie Garcia</span>: Your Team Sucks!</div>
+                <div class="item"><span class="user home">Brian Neuman</span>: No, it doesn't.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="trashBox" id="talkTrash">
+    <form id="trashForm" action="javascript:void(0)">
+        <textarea placeholder="Your team sucks!"></textarea>
+        <button type="button">Cancel</button> 
+        <input type="submit" value="Burn!" />
+    </form>
+</div>
+<div id="predictBox" class="trashBox">
+    <form id="predict" action="javascript:void(0)">
+        <div>My team will beat your team by the score of<br />
+        SF - <input class="score1" type="number" min="1" max="50" />  DC -  <input class="score2" type="number" min="1" max="50" /></div>
+        <button type="button">Cancel</button> 
+        <input type="submit" value="Predict" />
+    </form>
+</div>
+<div id="wagerBox" class="trashBox" style="height:132px">
+    <form id="placeBet" action="javascript:void(0)">
+        <p>What do you want to wager?</p>
+        <p><input type="radio" name="bet" class="theme"> Theme (make your rival wear your team's colors for a week).</p>
+        <p><input type="radio" name="bet" class="avatar"> FB Avatar (make your rival change his/her avatar to your teams logo for a week).</p>
+        <button type="button">Cancel</button> 
+        <input type="submit" value="Place bet" />
+    </form>
+</div>
+</body>
+</html>
+<!--End footer-->
